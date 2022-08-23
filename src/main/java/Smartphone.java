@@ -1,4 +1,3 @@
-
 public class Smartphone extends Product {
     protected String manufacturer;
 

@@ -1,4 +1,3 @@
-
 public class ProductManager {
     private final ProductRepository repository;
 
