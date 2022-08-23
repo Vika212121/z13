@@ -13,7 +13,7 @@ class ManagerTest {
     Product smartphone3 = new Smartphone(4, "Xiaomi 11", 25000, "xiaomi");
 
     @Test
-    void shouldAddIntoEmptyRepository() {
+    void shouldAddIntoEmpty() {
         manager.add(book1);
 
         Product[] expected = {book1};
@@ -23,7 +23,7 @@ class ManagerTest {
     }
 
     @Test
-    void shouldAddIntoNonEmptyRepository() {
+    void shouldAddIntoNonEmpty() {
         manager.add(book1);
         manager.add(book2);
 
@@ -34,19 +34,31 @@ class ManagerTest {
     }
 
     @Test
-    void shouldAddDifferentProducts() {
+    void shouldAddDifferentBook() {
         manager.add(book1);
         manager.add(book2);
-        manager.add(smartphone1);
 
-        Product[] expected = {book1, book2, smartphone1};
+
+        Product[] expected = {book1, book2};
+        Product[] actual = repository.findAll();
+
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    void shouldAddDifferentSmarthone() {
+        manager.add(smartphone1);
+        manager.add(smartphone2);
+        manager.add(smartphone3);
+
+
+        Product[] expected = {smartphone1, smartphone2, smartphone3};
         Product[] actual = repository.findAll();
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldNotSearchInEmptyRepository() {
+    void shouldNotSearchInEmpty() {
         Product[] expected = {};
         Product[] actual = manager.searchBy("smartphone2");
 
@@ -54,7 +66,7 @@ class ManagerTest {
     }
 
     @Test
-    void shouldSearchInRepositoryWithOneItem() {
+    void shouldSearchInyWithOneItem() {
         manager.add(book1);
 
         Product[] expected = {};
@@ -74,7 +86,7 @@ class ManagerTest {
     }
 
     @Test
-    void shouldSearchProductInRepositoryWithDifferentObjects() {
+    void shouldSearchProductInyWithDifferentObjects() {
         manager.add(book1);
         manager.add(book2);
         manager.add(smartphone1);
@@ -86,5 +98,13 @@ class ManagerTest {
 
         assertArrayEquals(expected, actual);
 
+    }
+    @Test
+    public void shouldAddNothing() {
+
+        Product[] expected = {};
+        Product[] actual =  repository.findAll();
+
+        assertArrayEquals(expected, actual);
     }
 }
