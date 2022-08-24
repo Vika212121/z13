@@ -6,10 +6,8 @@ public class ProductRepositoryTest {
     Book book1 = new Book(11, "bookName1", 1, "bookAuthor1");
     Book book2 = new Book(22, "bookName2", 12, "bookAuthor2");
 
-
     Smartphone smartphone1 = new Smartphone(1, "smartphoneName1", 1, "smartphoneManufacturer1");
     Smartphone smartphone2 = new Smartphone(2, "smartphoneName2", 2, "smartphoneManufacturer2");
-
 
     @Test
     public void shouldSaveOnlyBooks() {
@@ -86,19 +84,4 @@ public class ProductRepositoryTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test
-    public void shouldRemoveNothingIfIdNotCorrect() {
-        ProductRepository repo = new ProductRepository();
-        repo.save(book1);
-        repo.save(smartphone1);
-        repo.save(book2);
-        repo.save(smartphone2);
-
-        Assertions.assertThrows(RuntimeException.class, () -> repo.removeById(28));
-
-        Product[] expected = {book1, smartphone1, book2, smartphone2};
-        Product[] actual = repo.findAll();
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
 }

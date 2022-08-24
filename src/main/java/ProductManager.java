@@ -9,22 +9,10 @@ public class ProductManager {
         repository.save(product);
     }
 
-    public Product[] findAll() {
-        return repository.findAll();
-    }
-
-    public Product findById(int id) {
-        return repository.findById(id);
-    }
-
-    public void removeById(int id) {
-        repository.removeById(id);
-    }
-
     public Product[] searchBy(String text) {
         Product[] result = new Product[0];
-        for (Product product : repository.findAll()) {
-            if (matches(product, text)) {
+        for (Product product : repository.getAll()) {
+            if (product.matches(text)) {
                 Product[] tmp = new Product[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = product;
@@ -34,7 +22,7 @@ public class ProductManager {
         return result;
     }
 
-    public boolean matches(Product product, String text) {
-        return product.getName().contains(text);
+    public boolean matches(Product product, String search) {
+        return product.getName().contains(search);
     }
-}
+        }

@@ -1,4 +1,5 @@
 public class ProductRepository {
+
     private Product[] products = new Product[0];
 
     public void save(Product product) {
@@ -36,4 +37,7 @@ public class ProductRepository {
         products = tmp;
     }
 
+    public Product[] getAll() {
+        return products;
+    }
 }
